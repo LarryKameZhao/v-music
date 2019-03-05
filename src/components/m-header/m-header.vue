@@ -2,7 +2,10 @@
     <div class="m-header">
         <div class="icon"></div>
         <div class="text">tecent Music</div>
+        <router-link tag="div" to="/">
             <i class="icon-mine"></i>
+        </router-link>
+
     </div>
 </template>
 

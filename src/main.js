@@ -6,6 +6,10 @@ import store from './store'
 import "normalize.css"
 import "@/common/stylus/index.styl"
 import fastclick from 'fastclick'
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad, {
+  loading: require('common/image/default.png')
+})
 Vue.config.productionTip = false
 fastclick.attach(document.body)
 new Vue({

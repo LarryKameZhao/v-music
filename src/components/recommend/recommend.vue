@@ -14,14 +14,29 @@
             </div>
             <div class="recommend-list">
                 <h1 class="list-title">热门歌单推荐</h1>
-                <ul></ul>
+                <ul>
+                    <li v-for="item in discList" class="item">
+                        <div class="icon">
+                            <img
+                                width="60"
+                                height="60"
+                                :src="item.imgurl"
+                                alt=""
+                            />
+                        </div>
+                        <div class="text">
+                            <h2 class="name" v-html="item.creator.name"></h2>
+                            <p class="desc" v-html="item.dissname"></p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { getRecommend } from "../../api/recommend"
+import { getRecommend, getDiscList } from "../../api/recommend"
 import { ERR_OK } from "../../api/config"
 import Slider from "@/base/slider"
 export default {
@@ -31,10 +46,12 @@ export default {
     },
     created() {
         this._getRecommend()
+        this._getDiscList()
     },
     data() {
         return {
-            recommends: []
+            recommends: [],
+            discList: []
         }
     },
     methods: {
@@ -45,6 +62,14 @@ export default {
                     this.recommends = res.data.slider
                     console.log(this.recommends)
                 }
+            })
+        },
+        _getDiscList() {
+            getDiscList().then(res => {
+                console.log(res.data)
+                this.discList = res.data.list
+                console.log("discList")
+                console.log(this.discList)
             })
         }
     }
@@ -59,14 +84,15 @@ export default {
     width: 100%
     top: 88px
     bottom: 0
-    overflow hidden;
     .recommend-content
         height: 100%
+        overflow: hidden
         .slider-wrapper
             position: relative
             width: 100%
             height: 0
             padding-top: 40%
+            overflow: hidden
             .slider-content
                 position: absolute
                 top: 0
